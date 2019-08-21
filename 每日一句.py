@@ -27,18 +27,16 @@ def send_news():
         #扫描二维码，登录微信
         itchat.auto_login(hotReload = True)
         #获取对应好友的备注
-        my_friend = itchat.search_friends(name=u'王运辉')
+        my_friend = itchat.search_friends(name=u'')#单引号里填入好友备注名
         #获取对应备注名的一串数字
         MaBaopo = my_friend[0]["UserName"]
         message1 = get_news()[0]
         #翻译
         message2 = get_news()[1]
-        #message3 = get_news()[2][5:]
 
         #发送消息
         itchat.send(message1, toUserName=MaBaopo)
         itchat.send(message2, toUserName=MaBaopo)
-        #itchat.send(message3, toUserName=MaBaopo)
 
         #每天定时发送一次（t=86400秒），一直挂着就可以了
         t = Timer(86400, send_news)
